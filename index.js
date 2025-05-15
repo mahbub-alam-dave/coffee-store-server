@@ -8,12 +8,7 @@ require('dotenv').config()
 app.use(cors())
 app.use(express.json())
 
-// coffeeStoreAdmin
-// xQtfd2pQPxz7ROFZ
-
-
 const uri = `mongodb+srv://${process.env.COFFEE_USER}:${process.env.COFFEE_PASS}@mydatabase.sr7puaa.mongodb.net/?retryWrites=true&w=majority&appName=MyDatabase`;
-// const uri = "mongodb+srv://coffeeStoreAdmin:xQtfd2pQPxz7ROFZ@mydatabase.sr7puaa.mongodb.net/?retryWrites=true&w=majority&appName=MyDatabase";
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
