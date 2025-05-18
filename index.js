@@ -1,12 +1,13 @@
-const express = require('express')
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const cors = require('cors')
-const app =  express()
-const port = process.env.PORT || 3000
-require('dotenv').config()
 
-app.use(cors())
-app.use(express.json())
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.COFFEE_USER}:${process.env.COFFEE_PASS}@mydatabase.sr7puaa.mongodb.net/?retryWrites=true&w=majority&appName=MyDatabase`;
 const client = new MongoClient(uri, {
@@ -19,7 +20,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
 
-    await client.connect();
+    // await client.connect();
 
     const coffeeStoreDB = client.db("coffeeStore").collection("coffees")
     const usersCollection = client.db("coffeeStore").collection("users")
@@ -67,7 +68,7 @@ async function run() {
     // users injection in db
 
     app.get('/users', async(req, res) => {
-      const users = await usersCollection.find().toArray()
+      const users = await usersCollection.find().toArray() 
       res.send(users)
     })
     app.post('/users', async(req, res) => {
@@ -95,8 +96,8 @@ async function run() {
       res.send(result)
     })
 
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
 
   }
